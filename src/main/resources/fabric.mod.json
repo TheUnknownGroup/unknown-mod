@@ -2,14 +2,14 @@
 	"schemaVersion": 1,
 	"id": "bitches-mod",
 	"version": "${version}",
-	"name": "bitches-mod",
+	"name": "Bitches Mod",
 	"description": "Bitches Mod does nothing.",
 	"authors": [
 		"TheGremlinX"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "",
+		"sources": ""
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/bitches-mod/icon.png",
@@ -30,8 +30,8 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.14.21",
-		"minecraft": "~1.19.2",
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.20.4",
 		"java": ">=17",
 		"fabric-api": "*"
 	},

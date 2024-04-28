@@ -1,5 +1,5 @@
 {
-  "item.newtestingmod.bitches_item": "Bitches Item",
-  "itemGroup.newtestingmod.bitches": "Bitches Mod Tab",
-  "block.newtestingmod.bitches_block": "Bitches Block"
+  "item.bitches-mod.bitches_item": "Bitches Item",
+  "itemGroup.bitches-mod.bitches": "Bitches Mod Tab",
+  "block.bitches-mod.bitches_block": "Bitches Block"
 }
