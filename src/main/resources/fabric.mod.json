@@ -2,13 +2,14 @@
 	"schemaVersion": 1,
 	"id": "unknown-mod",
 	"version": "${version}",
-	"name": "unknown-mod",
+	"name": "Unknown Mod",
 	"description": "Unknown Mod does nothing.",
 	"authors": [
 		"TheGremlinX"
 	],
 	"contact": {
-		"sources": "https://github.com/devonk15/unknown-mod"
+		"homepage": "",
+		"sources": ""
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/unknown-mod/icon.png",
@@ -29,8 +30,8 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.14.21",
-		"minecraft": "~1.19.2",
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.20.4",
 		"java": ">=17",
 		"fabric-api": "*"
 	},
