@@ -1,8 +1,8 @@
-# bitches-mod
-Bitches Mod does nothing
-Bitches Mod adds two items into the game:
+# unknown-mod
+Unknown Mod does nothing
+Unknown Mod adds two items into the game:
 
--The Bitches Block
+-The Unknown Block
 
 
--The Bitches
+-The Unknown
