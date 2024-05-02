@@ -12,7 +12,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
-    public static final Block UNKNOWN_BLOCK = registerBlock("UNKNOWN_block",
+    public static final Block UNKNOWN_BLOCK = registerBlock("unknown_block",
         new Block(FabricBlockSettings.copyOf(Blocks.COAL_BLOCK)));
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

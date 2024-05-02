@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "unknown-mod",
+	"id": "unknown-mod" ,
 	"version": "${version}",
 	"name": "Unknown Mod",
 	"description": "Unknown Mod does nothing.",
