@@ -1,6 +1,5 @@
 {
-  "item.unknown-mod.unknown_item": "Bitches Item",
-  "itemGroup.unknown-mod.unknown": "Bitches Mod Tab",
-  "block.unknown-mod.unknown_block": "Bitches Block",
-  "itemGroup.unknown-mod.unknown2": "Bitches Mod Tab 2"
+  "item.unknown-mod.unknown_item": "Unknown Item",
+  "itemGroup.unknown-mod.unknown": "Unknown Mod Tab",
+  "block.unknown-mod.unknown_block": "Unknown Block"
 }
