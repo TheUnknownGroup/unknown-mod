@@ -1,6 +1,20 @@
 plugins {
-	id("fabric-loom") version '1.5.7'
+	id("fabric-loom") version '1.6.5'
 	id 'maven-publish'
+	id "com.modrinth.minotaur" version "2.+"
+}
+import com.modrinth.minotaur.dependencies.ModDependency
+modrinth {
+	token = "mrp_2552WKKBFHJ8J97p7l6xs6OKMdqF7AqBPK5JoHZaGtKaXTXliXEU5rxxJ4DL"
+	projectId = "7EyjyjZ4"
+	versionNumber = "0.5.0+1.20.4+build.1"
+	versionName = "Unknown Mod 0.5.0 MCV-1.20.4"
+	uploadFile = remapJar
+	gameVersions = ['1.20.4']
+	loaders = ['fabric']
+	dependencies = [
+	        new ModDependency('P7dR8mSH', 'required')
+	]
 }
 
 version = project.mod_version
