@@ -1,22 +1,24 @@
 plugins {
-	id("fabric-loom") version '1.6.5'
+	id 'fabric-loom' version '1.3-SNAPSHOT'
 	id 'maven-publish'
 	id "com.modrinth.minotaur" version "2.+"
 }
 import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
 	token = "mrp_2552WKKBFHJ8J97p7l6xs6OKMdqF7AqBPK5JoHZaGtKaXTXliXEU5rxxJ4DL"
 	projectId = "7EyjyjZ4"
-	versionNumber = "0.5.0+1.20.5+build.1"
-	versionName = "Unknown Mod 0.5.0 MCV-1.20.5"
+	versionNumber = ""
+	versionName = ""
 	uploadFile = remapJar
-	gameVersions = ['1.20.5']
+	gameVersions = [""]
+	System.out.println("Enter the changelog: ")
+	changelog = br.readLine()
 	loaders = ['fabric']
 	dependencies = [
-	        new ModDependency('P7dR8mSH', 'required')
+	        new ModDependency("P7dR8mSH", "required")
 	]
 }
-
 version = project.mod_version
 group = project.maven_group
 
@@ -30,6 +32,10 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
 }
 
 loom {
@@ -52,6 +58,8 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
@@ -63,7 +71,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 17
 }
 
 java {
@@ -72,8 +80,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
@@ -85,8 +93,7 @@ jar {
 // configure the maven publication
 publishing {
 	publications {
-		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
+		mavenJava(MavenPublication) {
 			from components.java
 		}
 	}

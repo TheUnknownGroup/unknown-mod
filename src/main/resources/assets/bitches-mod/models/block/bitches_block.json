@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "bitches-mod:block/bitches_block"
-  }
-}
