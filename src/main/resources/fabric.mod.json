@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "unknown-mod",
+	"id": "unknown-mod" ,
 	"version": "${version}",
 	"name": "Unknown Mod",
 	"description": "Unknown Mod adds two items into the game; The Unknown Block and the Unknown Item.",
@@ -30,11 +30,11 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.14.21",
-		"minecraft": "~1.19.2",
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.19.3",
 		"java": ">=17",
 		"fabric-api": "*",
-		"modmenu" : ">=4.0.6"
+		"modmenu": ">=5.0.0"
 	},
 	"suggests": {
 		"another-mod": "*"
