@@ -12,7 +12,7 @@ public class ModItemGroup {
     private static final ItemGroup UNKNOWN = FabricItemGroup.builder(
             new Identifier(NewTestingMod.MOD_ID, "unknown"))
             .icon(() -> new ItemStack(ModItems.UNKNOWN_ITEM))
-            .entries((enabledFeatures, entries, operatorEnabled) -> {
+            .entries((context, entries) -> {
                 entries.add(ModItems.UNKNOWN_ITEM);
                 entries.add(ModBlocks.UNKNOWN_BLOCK);
             })
