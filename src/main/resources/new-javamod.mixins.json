@@ -3,7 +3,7 @@
 	"package": "com.thegremlinx.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-      "NewTestingModMixin"
+		"NewTestingModMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
