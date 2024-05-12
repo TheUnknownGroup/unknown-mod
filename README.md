@@ -11,5 +11,5 @@ If you want, you can support my first mod by downloading it and give feedback to
 
 ## What is integrated into this mod? - Credits & What I've used
 So far only: 
-   * [TerraformersMC's Mod: Mod Menu](https://github.com/TerraformersMC/ModMenu) - Configurations when the mod is active
+   * [TerraformersMC's Mod: Mod Menu](https://github.com/TerraformersMC/ModMenu) - Configurations when their mod is active
    * [Modrinth's Gradle Plugin: Minotaur](https://github.com/modrinth/minotaur) - Publishing purposes
