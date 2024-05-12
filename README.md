@@ -9,7 +9,7 @@ These objects do nothing but add a new block to build with, or can also be used 
 ## Support!
 If you want, you can support my first mod by downloading it and give feedback to me about what you think I can add, or just an overall redo of the entire mod. Which, that will motivate me to create a better mod.
 
-## What is integrated into this mod?
+## What is integrated into this mod? - Credits & What I've used
 So far only: 
    * [TerraformersMC's Mod: Mod Menu](https://github.com/TerraformersMC/ModMenu) - Configurations when the mod is active
    * [Modrinth's Gradle Plugin: Minotaur](https://github.com/modrinth/minotaur) - Publishing purposes
