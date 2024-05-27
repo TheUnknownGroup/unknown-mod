@@ -13,3 +13,6 @@ If you want, you can support my first mod by downloading it and give feedback to
 So far only: 
    * [TerraformersMC's Mod: Mod Menu](https://github.com/TerraformersMC/ModMenu) - Configurations when their mod is active
    * [Modrinth's Gradle Plugin: Minotaur](https://github.com/modrinth/minotaur) - Publishing purposes
+   * [Fabric](https://github.com/FabricMC) & [Fabric API](https://github.com/FabricMC/fabric) - The mod is built on this
+## Where else can I find this mod?
+You can find this mod on [ModRinth]()! Soon, I'll be adding it to CurseForge, but as of right now, Modrinth is much better in terms of navigating the website.
