@@ -12,7 +12,7 @@ So far only:
    * [Modrinth's Gradle Plugin: Minotaur](https://github.com/modrinth/minotaur) - Publishing purposes
    * [Fabric](https://github.com/FabricMC) & [Fabric API](https://github.com/FabricMC/fabric) - The mod is built on this
 ## Where else can I find this mod?
-You can find this mod on [Modrinth](https://modrinth.com/mod/unknown-mod)! Soon, we'll be adding it to CurseForge, but as of right now, Modrinth is much better in terms of navigating and publishing the mod.
+You can find this mod on [Modrinth](https://modrinth.com/mod/unknown-mod)! Soon, we'll be adding it to CurseForge, but as of right now, Modrinth & Github is much better in terms of navigating and publishing the mod.
 ## Where can I find more information for this mod?
 You can find more information on this mod in the wiki, which you can click [here](https://github.com/TheUnknownGroup/unknown-mod/wiki) and we'll take you there!
 ## Support!
