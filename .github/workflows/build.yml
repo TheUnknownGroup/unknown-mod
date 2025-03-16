@@ -68,13 +68,9 @@ jobs:
         uses: actions/download-artifact@v4
 
       - name: Create Release
-        uses: marvinpinto/action-automatic-releases@v1.2.0
+        uses: actions/create-release@v1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Unknown Mod ${{ env.ver }}"
-          automatic_release_tag: "${{ env.tag }}"
-          prerelease: true
+          tag_name: ${{ env.tag }}
+          release_name: Unknown Mod ${{ env.ver }}
           draft: true
-          files: |
-            unknown-mod-0.1.1.jar
-            unknown-mod-0.1.1-sources.jar
+          prerelease: true
