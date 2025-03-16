@@ -6,6 +6,7 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
+def bui = project.property("build")
 def id = project.property("archives_base_name")
 def namev = project.property("name_var")
 def descv = project.property("desc_var")
@@ -17,18 +18,16 @@ def token = project.property("token")
 
 import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
-	BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
 	token = token
 	projectId = "7EyjyjZ4"
-	versionNumber = ""
-	versionName = ""
+	versionNumber = "${version}+${mcver}+${bui}"
+	versionName = "Unknown Mod V${version} MCV-${mcver} Fabric"
 	uploadFile = remapJar
 	gameVersions = [""]
-	System.out.println("Enter the changelog: ")
-	changelog = br.readLine()
+	changelog = file("changelog.md").text
 	loaders = ['fabric']
 	dependencies = [
-			new ModDependency("P7dR8mSH", "required")
+		new ModDependency("P7dR8mSH", "required")
 	]
 }
 
