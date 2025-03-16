@@ -14,11 +14,10 @@ def javaver = project.property("java_version")
 def loader = project.property("loader_version")
 def api = project.property("fabric_version")
 def mcver = project.property("minecraft_version")
-def token = project.property("token")
 
 import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
-	token = token
+	token = project.property("token")
 	projectId = "7EyjyjZ4"
 	versionNumber = "${version}+${mcver}+${bui}"
 	versionName = "Unknown Mod V${version} MCV-${mcver} Fabric"
