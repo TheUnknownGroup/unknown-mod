@@ -22,7 +22,7 @@ modrinth {
 	versionNumber = "${version}+${mcver}+${bui}"
 	versionName = "Unknown Mod V${version} MCV-${mcver} Fabric"
 	uploadFile = remapJar
-	gameVersions = [""]
+	gameVersions = ["1.19"]
 	changelog = file("changelog.md").text
 	loaders = ['fabric']
 	dependencies = [
