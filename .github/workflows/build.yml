@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
 env:
   version: "0.1.1"
-  ver: "V${{ env.version }} MCV-1.19 Fabric"
-  tag: "${{ env.version }}+build.1"
+  ver: "V0.1.1 MCV-1.19 Fabric"
+  tag: "0.1.1+build.1"
 jobs:
   build:
 
