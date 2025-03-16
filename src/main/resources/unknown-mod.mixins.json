@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "com.thegremlinx.mixin.client",
+	"package": "xyz.theunknowngroup.mixin",
 	"compatibilityLevel": "JAVA_17",
-	"client": [
-		"NewTestingModClientMixin"
+	"mixins": [
+		"ExampleMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

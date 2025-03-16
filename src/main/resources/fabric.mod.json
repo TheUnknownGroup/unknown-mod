@@ -1,51 +1,41 @@
 {
 	"schemaVersion": 1,
-	"id": "unknown-mod" ,
+	"id": "${id}",
 	"version": "${version}",
-	"name": "Unknown Mod",
-	"description": "Unknown Mod adds two items into the game; The Unknown Block and the Unknown Item.",
+	"name": "${name}",
+	"description": "${desc}",
 	"authors": [
 		"TheGremlinX"
 	],
 	"contact": {
-		"issues": "https://github.com/devonk15/unknown-mod/issues",
-		"sources": "https://github.com/devonk15/unknown-mod"
+		"homepage": "http://web.thegremlinx.xyz/docs",
+		"sources": "https://github.com/TheUnknownGroup/unknown-mod"
 	},
-	"license": "MIT License",
+	"license": "MIT",
 	"icon": "assets/unknown-mod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.thegremlinx.NewTestingMod"
-		],
-		"client": [
-			"com.thegremlinx.NewTestingClient"
+			"xyz.theunknowngroup.UnknownMod"
 		]
 	},
 	"mixins": [
-		"new-javamod.mixins.json",
-		{
-			"config": "new-javamod.client.mixins.json",
-			"environment": "client"
-		}
+		"unknown-mod.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.10",
-		"minecraft": "~1.19.3",
-		"java": ">=17",
-		"fabric-api": ">=0.68.1"
-	},
-	"suggests": {
-		"another-mod": "*"
+		"fabricloader": ">=${loader}",
+		"minecraft": "~${mcver}",
+		"java": ">=${java}",
+		"fabric": ">=${api}"
 	},
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.github_releases": "https://github.com/devonk15/unknown-mod/releases",
+				"modmenu.wiki": "http://web.thegremlinx.xyz/docs",
+				"modmenu.github_releases": "https://github.com/TheUnknownGroup/releases",
+				"modmenu.modrinth": "https://modrinth.com/mod/unknown-mod",
+				"modmenu.discord": "https://discord.gg/jspNzHYTFn",
 				"modmenu.github_sponsors": "https://github.com/sponsors/devonk15"
-			},
-			"parent": {
-				"icon": "assets/unknown-mod/icon.png"
 			},
 			"update-checker": true
 		}
