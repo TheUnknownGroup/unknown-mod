@@ -14,13 +14,14 @@ def javaver = project.property("java_version")
 def loader = project.property("loader_version")
 def api = project.property("fabric_version")
 def mcver = project.property("minecraft_version")
+def ver = project.property("ver")
 
 import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
 	token = project.property("token")
 	projectId = "7EyjyjZ4"
-	versionNumber = "${version}+${mcver}+${bui}"
-	versionName = "Unknown Mod V${version} MCV-${mcver} Fabric"
+	versionNumber = "${ver}+${mcver}+${bui}"
+	versionName = "Unknown Mod V${ver} MCV-${mcver} Fabric"
 	uploadFile = remapJar
 	gameVersions = ["1.19"]
 	changelog = file("changelog.md").text
