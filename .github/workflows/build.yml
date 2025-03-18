@@ -46,7 +46,7 @@ jobs:
       - name: capture build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Artifacts
+          name: jars
           path: build/libs/
 
   modrinth:
@@ -84,17 +84,29 @@ jobs:
         uses: actions/download-artifact@v4
 
       - name: Create Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
+          name: Unknown Mod ${{ env.ver }}
           tag_name: ${{ env.tag }}
-          release_name: Unknown Mod ${{ env.ver }}
+          body_path: ${{ github.workspace }}/changelog.md
           draft: true
-          prerelease: true
-          body: |
-            Updated first version of the mod
+          files: |
+            jars/*.jar
 
-            Compatible with [ModMenu](https://modrinth.com/mod/modmenu/version/4.0.6) version 4.0.0 (or any version that is compatible with Minecraft Version 1.19).
-
-            Made changes to the `fabric.mod.json` file, and added Modrinth publishing configurations in the `build.gradle` file.
+#      - name: Create Release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ env.tag }}
+#          release_name: Unknown Mod ${{ env.ver }}
+#          draft: true
+#          prerelease: true
+#          body: |
+#            Updated first version of the mod
+#
+#            Compatible with [ModMenu](https://modrinth.com/mod/modmenu/version/4.0.6) version 4.0.0 (or any version that is compatible with Minecraft Version 1.19).
+#
+#            Made changes to the `fabric.mod.json` file, and added Modrinth publishing configurations in the `build.gradle` file.
+#
+#      - name: Upload Assets
