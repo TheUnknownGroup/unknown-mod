@@ -14,9 +14,10 @@ env:
   version: "0.1.1"
   ver: "V0.1.1 MCV-1.19 Fabric"
   tag: "0.1.1+build.1"
+  java_ver: "17"
+
 jobs:
   build:
-
     if: ${{ !contains(github.event.head_commit.message, '[skip]') }}
 
     permissions:
@@ -42,11 +43,58 @@ jobs:
       - name: build
         run: ./gradlew build
 
-      - name: Publish to Modrinth
-        run: ./gradlew modrinth -Ptoken="${{ secrets.TOKEN }}"
-
       - name: capture build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
           path: build/libs/
+
+  modrinth:
+    if: ${{ contains(github.event.head_commit.message, '[m]') }}
+
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: setup jdk
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ env.java_ver }}
+        distribution: 'temurin'
+
+    - name: Publish to Modrinth
+      run: ./gradlew modrinth -Ptoken="${{ secrets.TOKEN }}"
+
+  release:
+    permissions:
+      contents: write
+
+    if: ${{ !contains(github.event.head_commit.message, '[skip]') }}
+
+    needs: [ build ]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Files
+        uses: actions/download-artifact@v4
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.tag }}
+          release_name: Unknown Mod ${{ env.ver }}
+          draft: true
+          prerelease: true
+          body: |
+            Updated first version of the mod
+
+            Compatible with [ModMenu](https://modrinth.com/mod/modmenu/version/4.0.6) version 4.0.0 (or any version that is compatible with Minecraft Version 1.19).
+
+            Made changes to the `fabric.mod.json` file, and added Modrinth publishing configurations in the `build.gradle` file.
