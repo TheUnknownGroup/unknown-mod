@@ -1,0 +1,37 @@
+{
+    "schema_version": 1,
+    "quilt_loader": {
+        "group": "${group}",
+        "id": "${name}",
+        "version": "${version}",
+        "metadata": {
+            "name": "unknown mod",
+            "description": "Unknown Mod adds two items into the game; The Unknown Block and the Unknown Item.",
+            "contributors": {
+                "TheGremlinX": "Owner"
+            },
+            "contact": {},
+            "icon": "assets/example_mod/icon.png",
+            "license": "MIT"
+        },
+        "intermediate_mappings": "net.fabricmc:intermediary",
+        "entrypoints": {
+            "init": "io.github.devonk15.unknown_mod.UnknownMod"
+        },
+        "depends": [
+            {
+                "id": "quilt_loader",
+                "versions": ">=${loader}"
+            },
+            {
+                "id": "quilted_fabric_api",
+                "versions": ">=7.0.2"
+            },
+            {
+                "id": "minecraft",
+                "versions": ">=1.19"
+            }
+        ]
+    },
+    "mixin": "unknown-mod.mixins.json"
+}
