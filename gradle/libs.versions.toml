@@ -1,12 +1,13 @@
 # The latest versions are available at https://quiltmc.org/en/usage/latest-versions
 [versions]
-minecraft = "1.19"
-quilt_mappings = "1.19+build.1"
+minecraft = "1.19.2"
+quilt_mappings = "1.19.2+build.22"
 
-quilt_loom = "1.8.5"
+quilt_loom = "1.7.4"
 quilt_loader = "0.28.0"
 
-quilted_fabric_api = "2.0.0-beta.1+0.56.3-1.19"
+quilted_fabric_api = "4.0.0-beta.30+0.77.0-1.19.2"
+quilt_standard_libraries = "3.0.0-beta.29+1.19.2"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }

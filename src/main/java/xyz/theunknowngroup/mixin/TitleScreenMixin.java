@@ -1,6 +1,6 @@
-package io.github.devonk15.unknown_mod.mixin;
+package xyz.theunknowngroup.mixin;
 
-import io.github.devonk15.unknown_mod.UnknownMod;
+import xyz.theunknowngroup.UnknownMod;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
