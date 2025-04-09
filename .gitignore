@@ -42,3 +42,7 @@ replay_*.log
 /remappedSrc
 
 .gitignore
+
+command/
+
+datapacks/

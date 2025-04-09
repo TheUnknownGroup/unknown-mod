@@ -32,12 +32,18 @@
 		"modmenu": {
 			"links": {
 				"modmenu.wiki": "http://web.thegremlinx.xyz/docs",
-				"modmenu.github_releases": "https://github.com/TheUnknownGroup/releases",
+				"modmenu.github_releases": "https://github.com/TheUnknownGroup/unknown-mod/releases",
 				"modmenu.modrinth": "https://modrinth.com/mod/unknown-mod",
 				"modmenu.discord": "https://discord.gg/jspNzHYTFn",
 				"modmenu.github_sponsors": "https://github.com/sponsors/devonk15"
 			},
 			"update-checker": true
 		}
+	},
+	"conflicts": {
+		"modmenu": "<4.0.5"
+	},
+	"suggests": {
+		"dashloader": "*"
 	}
 }
