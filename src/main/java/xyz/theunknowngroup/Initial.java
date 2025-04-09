@@ -1,7 +1,7 @@
 package xyz.theunknowngroup;
 
 import xyz.theunknowngroup.block.ModBlocks;
-import xyz.theunknowngroup.command.AddBlocksCommand;
+//import xyz.theunknowngroup.command.AddBlocksCommand;
 import xyz.theunknowngroup.item.ModItems;
 
 public class Initial {
