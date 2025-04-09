@@ -10,7 +10,7 @@ public class Initial {
         ModItems.initialize();
         ModBlocks.registerModBlocks();
         ModBlocks.initialize();
-        AddBlocksCommand.register();
-        AddBlocksCommand.initialize();
+//        AddBlocksCommand.register();
+//        AddBlocksCommand.initialize();
     }
 }
