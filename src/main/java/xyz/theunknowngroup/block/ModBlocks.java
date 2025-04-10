@@ -6,30 +6,30 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
 import xyz.theunknowngroup.UnknownMod;
-import xyz.theunknowngroup.item.ModItemGroup;
 
 public class ModBlocks {
     public static String MOD_ID = UnknownMod.MOD_ID;
+    public static String MOD_NAME = UnknownMod.MOD_NAME;
     public static final Block UNKNOWN_BLOCK = registerBlock("unknown_block",
-            new Block(FabricBlockSettings.of(Material.STONE)), ModItemGroup.UNKNOWN);
-    private static Block registerBlock(String name, Block block, ItemGroup tab) {
-        registerBlockItem(name, block, tab);
-        return Registry.register(Registry.BLOCK, new Identifier(MOD_ID, name), block);
+            new Block(FabricBlockSettings.of(Material.STONE)));
+    private static Block registerBlock(String name, Block block) {
+        registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, new Identifier(MOD_ID, name), block);
     }
 
-    private static Item registerBlockItem(String name, Block block, ItemGroup tab) {
-        return Registry.register(Registry.ITEM, new Identifier(MOD_ID, name),
-                new BlockItem(block, new FabricItemSettings().group(tab).maxCount(64)));
+    private static Item registerBlockItem(String name, Block block) {
+        return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name),
+                new BlockItem(block, new FabricItemSettings().maxCount(64)));
     }
 
     public static void registerModBlocks() {
-        UnknownMod.LOGGER.info("Registering mod blocks for {}", MOD_ID);
+        UnknownMod.LOGGER.info("[{}] Registering mod blocks for {}", MOD_NAME, MOD_ID);
     }
     public static void initialize() {
-        UnknownMod.LOGGER.info("Mod blocks for: {} have been initialized and registered.", MOD_ID);
+        UnknownMod.LOGGER.info("[{}] Mod blocks for: {} have been initialized and registered.", MOD_NAME, MOD_ID);
     }
 }
