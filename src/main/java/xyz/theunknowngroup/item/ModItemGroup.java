@@ -16,7 +16,7 @@ public class ModItemGroup {
     private static ItemGroup register(String path) {
         return FabricItemGroup.builder(new Identifier(MOD_ID, path))
                 .icon(() -> new ItemStack(ModItems.UNKNOWN_ITEM))
-                .entries((enabledFeatures, entries, operatorEnabled) -> {
+                .entries((enabledFeatures, entries) -> {
                     entries.add(ModItems.UNKNOWN_ITEM);
                     entries.add(ModBlocks.UNKNOWN_BLOCK);
                 })
