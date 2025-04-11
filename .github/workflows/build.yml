@@ -2,7 +2,7 @@ name: Build v0.1.1
 on: 
   push:
     branches:
-    - 1.19.3+fabric
+      main
   workflow_dispatch:
   
 env:
