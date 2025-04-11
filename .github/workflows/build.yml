@@ -1,6 +1,5 @@
 name: Build v0.1.1
 on: 
-  push:
   workflow_dispatch:
   
 env:
