@@ -24,7 +24,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=${loader}",
-		"minecraft": "~${mcver}",
+		"minecraft": ">=${mcver}",
 		"java": ">=${java}",
 		"fabric": ">=${api}"
 	},
@@ -41,7 +41,7 @@
 		}
 	},
 	"conflicts": {
-		"modmenu": "<4.0.5"
+		"modmenu": "<10.0.0"
 	},
 	"suggests": {
 		"dashloader": "*"

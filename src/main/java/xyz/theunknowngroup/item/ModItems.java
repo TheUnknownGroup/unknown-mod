@@ -1,6 +1,5 @@
 package xyz.theunknowngroup.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -11,7 +10,7 @@ public class ModItems {
     public static String MOD_ID = UnknownMod.MOD_ID;
     public static String MOD_NAME = UnknownMod.MOD_NAME;
     public static final Item UNKNOWN_ITEM = registerItem("unknown_item",
-            new Item(new FabricItemSettings().maxCount(1)));
+            new Item(new Item.Settings().maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), item);

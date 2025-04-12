@@ -7,9 +7,9 @@ on:
   
 env:
   version: "0.1.1"
-  ver: "V0.1.1 MCV-1.20 Fabric"
-  tag: "0.1.1-1.20+build.1"
-  java_ver: "17"
+  ver: "V0.1.1 MCV-1.20.5 Fabric"
+  tag: "0.1.1-1.20.5+build.1"
+  java_ver: "21"
 
 jobs:
   build:
