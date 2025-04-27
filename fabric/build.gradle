@@ -1,0 +1,103 @@
+plugins {
+    id 'fabric-loom' version '1.6.5'
+}
+
+def id = project.property("archives_base_name")
+def namev = project.property("name_var")
+def descv = project.property("desc_var")
+def javaver = project.property("java_version")
+def loader = project.property("loader_version")
+def mcver = project.property("minecraft_version")
+def yarn = project.property("yarn_mappings")
+def fab = project.property("fabric_version")
+def ver = project.property("ver")
+def modver = project.property("mod_version-fabric")
+def group = project.property("maven_group")
+def modmen = project.property("modmenu_ver")
+
+import com.modrinth.minotaur.dependencies.ModDependency;
+modrinth {
+    token = project.property("token")
+    projectId = "7EyjyjZ4"
+    versionNumber = "${modver}"
+    versionName = "${namev} V${ver} MCV-${mcver} Fabric"
+    uploadFile = remapJar
+    gameVersions = ["1.20.5"]
+    changelog = file("../changelog.md").text
+    loaders = ['fabric']
+    dependencies = [
+        new ModDependency("P7dR8mSH", "required")
+    ]
+}
+
+dependencies {
+    minecraft "org.mojang:minecraft:$mcver"
+    mappings "net.fabricmc:yarn:$yarn:v2"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:$fab"
+    modImplementation "net.fabricmc:fabric-loader:$loader"
+}
+
+base {
+    archivesName = id+"-"+modver
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        "unknown-mod" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+jar {
+    inputs.property "version", project.base.archivesName
+
+    from("LICENSE") {
+        rename { "${it}_${inputs.properties.version}"}
+    }
+}
+
+java {
+    withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            groupId = group
+            artifactId = id
+            version = modver
+//            from components.json
+        }
+    }
+
+    repositories {
+
+    }
+}
+
+processResources {
+    inputs.property "version", modver
+
+    filesMatching("fabric.mod.json") {
+        expand "version": inputs.properties.version,
+                "api": fab,
+                "mcver": mcver,
+                "loader": loader,
+                "java": javaver,
+                "id": id,
+                "name": namev,
+                "desc": descv,
+                "modmen": modmen
+    }
+}

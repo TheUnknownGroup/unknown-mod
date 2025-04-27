@@ -1,0 +1,15 @@
+
+def id = project.property("archives_base_name")
+def modver = project.property("mod_version-quilt")
+
+base {
+    archivesName = id+"-"+modver
+}
+
+jar {
+    inputs.property "version", project.base.archivesName
+
+    from("LICENSE") {
+        rename { "${it}_${inputs.properties.version}"}
+    }
+}
