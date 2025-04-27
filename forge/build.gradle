@@ -1,6 +1,3 @@
-plugins {
-}
-
 def id = project.property("archives_base_name")
 def modver = project.property("mod_version-forge")
 
