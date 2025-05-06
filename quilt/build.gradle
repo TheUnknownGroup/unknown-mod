@@ -1,8 +1,50 @@
+plugins {
+    alias libs.plugins.quilt.loom
+}
+
+// loom {
+//    mods {
+//        "unknown-mod" {
+//            sourceSet("main")
+//        }
+//    }
+// }
+
+// dependencies {
+//     minecraft libs.minecraft
+//     mappings "org.quiltmc:quilt-mappings:${quiltmap}"
+
+//     modImplementation "org.quiltmc:quilt-loader:${quiltload}"
+//     modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${quiltver}"
+//     modImplementation "org.quiltmc:qsl:${quiltqsl}"
+// }
+
 def id = project.property("archives_base_name")
 def modver = project.property("mod_version-quilt")
+def namev = project.property("name_var")
+def mcver = project.property("quilt_minecraft_version")
+def javaver = project.property("java_version")
+def quiltload = project.property("quilt_loader_version")
+def quiltver = project.property("quilt_version")
+def quiltmap = project.property("quilt_mappings")
+def quiltqsl = project.property("quilt_qsl")
+
+import com.modrinth.minotaur.dependencies.ModDependency;
+modrinth {
+    token = project.property("token")
+    projectId = "7EyjyjZ4"
+    versionNumber = "${modver}"
+    versionName = "${namev} V${ver} MCV-${mcver} Quilt"
+    gameVersions = ["1.20.5"]
+    changelog = file("../changelog.md").text
+    loaders = ['quilt']
+    dependencies = [
+        new ModDependency("qvIfYCYJ", "required")
+    ]
+}
 
 base {
-    archivesName = id+"-"+modver
+    archivesName = id
 }
 
 jar {
@@ -10,5 +52,37 @@ jar {
 
     from("LICENSE") {
         rename { "${it}_${inputs.properties.version}"}
+    }
+}
+
+java {
+    withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = 'UTF-8'
+    it.options.release = 21
+}
+
+processResources {
+    inputs.property "version", modver
+
+    filesMatching("quilt.mod.json") {
+        expand "version": inputs.properties.version
+    }
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+
     }
 }

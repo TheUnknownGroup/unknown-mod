@@ -1,5 +1,22 @@
 def id = project.property("archives_base_name")
 def modver = project.property("mod_version-forge")
+def namev = project.property("name_var")
+def mcver = project.property("minecraft_version")
+
+import com.modrinth.minotaur.dependencies.ModDependency;
+modrinth {
+    token = project.property("token")
+    projectId = "7EyjyjZ4"
+    versionNumber = "${modver}"
+    versionName = "${namev} V${ver} MCV-${mcver} Fabric"
+    uploadFile = jar
+    gameVersions = ["1.20.5"]
+    changelog = file("../changelog.md").text
+    loaders = ['fabric']
+    dependencies = [
+            new ModDependency("P7dR8mSH", "required")
+    ]
+}
 
 base {
     archivesName = id+"-"+modver
@@ -11,4 +28,15 @@ jar {
     from("LICENSE") {
         rename { "${it}_${inputs.properties.version}"}
     }
+}
+
+java {
+    withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
 }
