@@ -19,7 +19,7 @@ public class ModItemGroup {
             "unknown", "itemGroup.unknown-mod.unknown"
     );
     private static ItemGroup register(String path, String key) {
-        return Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, path),
+        return Registry.register(Registries.ITEM_GROUP, Identifier.of(MOD_ID, path),
                 FabricItemGroup.builder()
                         .displayName(Text.translatable(key))
                 .icon(() -> new ItemStack(ModItems.UNKNOWN_ITEM))
