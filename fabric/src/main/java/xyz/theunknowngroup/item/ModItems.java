@@ -13,7 +13,7 @@ public class ModItems {
             new Item(new Item.Settings().maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), item);
     }
 
     public static void registerModItems() {
