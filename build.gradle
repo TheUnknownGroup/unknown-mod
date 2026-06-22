@@ -17,7 +17,7 @@ def ver = project.property("ver")
 def modmen = project.property("modmenu_ver")
 
 modrinth {
-    token = System.getProperty("token")
+    token = System.getenv("MODRINTH_TOKEN")
     projectId = "7EyjyjZ4"
     versionNumber = "${version}"
     versionName = "Unknown Mod V${ver} MCV-${mcver} Fabric"
