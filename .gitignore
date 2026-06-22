@@ -39,9 +39,10 @@ replay_*.log
 *.hprof
 *.jfr
 
-remappedSrc/
-.gitignore
-command/
-datapacks/
+/remappedSrc
 
-save.txt
+.gitignore
+
+command/
+
+datapacks/
