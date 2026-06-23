@@ -41,7 +41,8 @@
 		}
 	},
 	"conflicts": {
-		"modmenu": "<14.0.0"
+		"modmenu": "<15.0.0",
+		"fabric-api": ">0.136.1+1.21.8"
 	},
 	"suggests": {
 		"dashloader": "*"
