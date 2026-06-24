@@ -7,12 +7,12 @@ on:
   
 env:
   version: "0.1.1"
-  ver-a: "v0.1.1 [1.21.11-fabric]"
-  tag-a: "0.1.1-1.21.11+alpha.1"
-  ver-b: "v0.1.1 [1.21.11-fabric]"
-  tag-b: "0.1.1-1.21.11+beta.1"
-  ver-r: "V0.1.1 MCV-1.21.11 Fabric"
-  tag-r: "0.1.1-1.21.11+build.1"
+  ver_a: "v0.1.1 [1.21.11-fabric]"
+  tag_a: "0.1.1-1.21.11+alpha.1"
+  ver_b: "v0.1.1 [1.21.11-fabric]"
+  tag_b: "0.1.1-1.21.11+beta.1"
+  ver_r: "V0.1.1 MCV-1.21.11 Fabric"
+  tag_r: "0.1.1-1.21.11+build.1"
   java_ver: "25"
 
 jobs:
@@ -96,8 +96,8 @@ jobs:
         if: ${{ !contains(github.event.head_commit.message, '[a]') || !contains(github.event.head_commit.message, '[b]')}}
         uses: softprops/action-gh-release@v3
         with:
-          name: Unknown Mod ${{ env.ver-r }}
-          tag_name: ${{ env.tag-r }}
+          name: Unknown Mod ${{ env.ver_r }}
+          tag_name: ${{ env.tag_r }}
           body_path: ${{ github.workspace }}/changelog.md
           draft: true
           generate_release_notes: true
@@ -108,8 +108,8 @@ jobs:
         if: ${{ contains(github.event.head_commit.message, '[a]') && !contains(github.event.head_commit.message, '[b]')}}
         uses: softprops/action-gh-release@v3
         with:
-          name: Unknown Mod ${{ env.ver-a }}
-          tag_name: ${{ env.tag-a }}
+          name: Unknown Mod ${{ env.ver_a }}
+          tag_name: ${{ env.tag_a }}
           body_path: ${{ github.workspace }}/changelog.md
           draft: true
           generate_release_notes: true
@@ -120,8 +120,8 @@ jobs:
         if: ${{ contains(github.event.head_commit.message, '[b]') && !contains(github.event.head_commit.message, '[a]')}}
         uses: softprops/action-gh-release@v3
         with:
-          name: Unknown Mod ${{ env.ver-b }}
-          tag_name: ${{ env.tag-b }}
+          name: Unknown Mod ${{ env.ver_b }}
+          tag_name: ${{ env.tag_b }}
           body_path: ${{ github.workspace }}/changelog.md
           draft: true
           generate_release_notes: true
