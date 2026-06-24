@@ -1,16 +1,15 @@
 package xyz.theunknowngroup.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import xyz.theunknowngroup.UnknownMod;
 
 import java.util.function.Function;
@@ -18,14 +17,20 @@ import java.util.function.Function;
 public class ModBlocks {
     public static String MOD_ID = UnknownMod.MOD_ID;
     public static String MOD_NAME = UnknownMod.MOD_NAME;
+
     public static final Block UNKNOWN_BLOCK = registerBlock("unknown_block",
-            Block::new, Block.Settings.copy(Blocks.STONE));
-    private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> fac, AbstractBlock.Settings block) {
-        final Identifier id = Identifier.of(MOD_ID, name);
-        final RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, id);
-        final Block blocks = Blocks.register(key, fac, block);
-        Items.register(blocks);
-        return blocks;
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE));
+
+    private static <T extends Block> T registerBlock(String name, Function<BlockBehaviour.Properties, T> fac, BlockBehaviour.Properties block) {
+        // If you need to make a non-itemized block register, go back to the fabric docs
+        ResourceKey<Block> key1 = ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MOD_ID, name));
+        ResourceKey<Item> key2 = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name));
+
+        T blocks = fac.apply(block.setId(key1));
+        BlockItem blockItem = new BlockItem(blocks, new Item.Properties().setId(key2).useBlockDescriptionPrefix().stacksTo(64));
+
+        Registry.register(BuiltInRegistries.ITEM, key2, blockItem);
+        return Registry.register(BuiltInRegistries.BLOCK, key1, blocks);
     }
     public static void registerModBlocks() {
         UnknownMod.LOGGER.info("[{}] Registering mod blocks for {}", MOD_NAME, MOD_ID);

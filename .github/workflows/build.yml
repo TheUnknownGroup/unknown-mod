@@ -7,8 +7,12 @@ on:
   
 env:
   version: "0.1.1"
-  ver: "V0.1.1 MCV-1.21.9 Fabric"
-  tag: "0.1.1-1.21.9+build.1"
+  ver-a: "v0.1.1 [1.21.11-fabric]"
+  tag-a: "0.1.1-1.21.11+alpha.1"
+  ver-b: "v0.1.1 [1.21.11-fabric]"
+  tag-b: "0.1.1-1.21.11+beta.1"
+  ver-r: "V0.1.1 MCV-1.21.11 Fabric"
+  tag-r: "0.1.1-1.21.11+build.1"
   java_ver: "25"
 
 jobs:
@@ -89,10 +93,35 @@ jobs:
         uses: actions/download-artifact@v8
 
       - name: Create Release
+        if: ${{ !contains(github.event.head_commit.message, '[a]') || !contains(github.event.head_commit.message, '[b]')}}
         uses: softprops/action-gh-release@v3
         with:
-          name: Unknown Mod ${{ env.ver }}
-          tag_name: ${{ env.tag }}
+          name: Unknown Mod ${{ env.ver-r }}
+          tag_name: ${{ env.tag-r }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar
+
+      - name: Create Release
+        if: ${{ contains(github.event.head_commit.message, '[a]') && !contains(github.event.head_commit.message, '[b]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver-a }}
+          tag_name: ${{ env.tag-a }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar
+            
+      - name: Create Release
+        if: ${{ contains(github.event.head_commit.message, '[b]') && !contains(github.event.head_commit.message, '[a]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver-b }}
+          tag_name: ${{ env.tag-b }}
           body_path: ${{ github.workspace }}/changelog.md
           draft: true
           generate_release_notes: true

@@ -46,3 +46,5 @@ replay_*.log
 command/
 
 datapacks/
+
+.github/workflows/build.yml

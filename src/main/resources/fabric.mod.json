@@ -19,9 +19,6 @@
 			"xyz.theunknowngroup.UnknownMod"
 		]
 	},
-	"mixins": [
-		"unknown-mod.mixins.json"
-	],
 	"depends": {
 		"fabricloader": ">=${loader}",
 		"minecraft": ">=${mcver}",
@@ -41,7 +38,7 @@
 		}
 	},
 	"conflicts": {
-		"modmenu": "<16.0.0"
+		"modmenu": "<17.0.0"
 	},
 	"suggests": {
 		"dashloader": "*"

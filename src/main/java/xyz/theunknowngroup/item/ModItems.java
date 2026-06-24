@@ -1,12 +1,11 @@
 package xyz.theunknowngroup.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import xyz.theunknowngroup.UnknownMod;
 
 import java.util.function.Function;
@@ -15,13 +14,13 @@ public class ModItems {
     public static String MOD_ID = UnknownMod.MOD_ID;
     public static String MOD_NAME = UnknownMod.MOD_NAME;
     public static final Item UNKNOWN_ITEM = registerItem("unknown_item",
-            Item::new, new Item.Settings().maxCount(1));
-
-    public static Item registerItem(String name, Function<Item.Settings, Item> fac, Item.Settings item) {
-        final RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, name));
-        return Items.register(key, fac, item);
+            Item::new, new Item.Properties().stacksTo(1));
+    public static <T extends Item> T registerItem(String name, Function<Item.Properties, T> fac, Item.Properties item) {
+        ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name));
+        T items = fac.apply(item.setId(key));
+        Registry.register(BuiltInRegistries.ITEM, key, items);
+        return items;
     }
-
     public static void registerModItems() {
         UnknownMod.LOGGER.info("[{}] Registering mod items for {}", MOD_NAME, MOD_ID);
     }

@@ -13,6 +13,7 @@ public class Initial {
         ModBlocks.initialize();
 //        AddBlocksCommand.register();
 //        AddBlocksCommand.initialize();
+        ModItemGroup.registerModTab();
         ModItemGroup.initialize();
     }
 }
