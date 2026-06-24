@@ -91,6 +91,9 @@ jobs:
 
       - name: Download Files
         uses: actions/download-artifact@v8
+        with:
+          path: jars
+          merge-multiple: true
 
       - run: |
           find . -name "*.jar"
