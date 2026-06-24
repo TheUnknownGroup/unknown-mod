@@ -92,7 +92,9 @@ jobs:
       - name: Download Files
         uses: actions/download-artifact@v8
 
-      - run: echo "Artifacts "  && ls -la
+      - run: |
+          find . -name "*.jar"
+          echo "Artifacts "  && ls -la
 
       - name: Create Release
         if: ${{ !contains(github.event.head_commit.message, '[a]') || !contains(github.event.head_commit.message, '[b]')}}
