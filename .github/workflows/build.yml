@@ -1,22 +1,22 @@
-# Automatically build the project and run any configured tests for every push
-# and submitted pull request. This can help catch issues that only occur on
-# certain platforms or Java versions, and provides a first line of defence
-# against bad commits.
-
 name: Build v0.1.1
 on:
   push:
     branches:
-      - main
-
+      main
   workflow_dispatch:
+
 env:
   version: "0.1.1"
-  ver: "V0.1.1 MCV-1.19 Fabric"
-  tag: "0.1.1+build.1"
+  ver_a: "v0.1.1 [1.19-fabric]"
+  tag_a: "0.1.1-1.19+alpha.1"
+  ver_b: "v0.1.1 [1.19-fabric]"
+  tag_b: "0.1.1-1.19+beta.1"
+  ver_r: "0.1.1 [1.19-fabric]"
+  tag_r: "0.1.1-1.19"
+  java_ver: "17"
+
 jobs:
   build:
-
     if: ${{ !contains(github.event.head_commit.message, '[skip]') }}
 
     permissions:
@@ -25,15 +25,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v4
+        uses: gradle/actions/wrapper-validation@v6
 
       - name: setup jdk
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5.3.0
         with:
-          java-version: '17'
+          java-version: ${{ env.java_ver }}
           distribution: 'temurin'
 
       - name: make gradle wrapper executable
@@ -42,39 +42,91 @@ jobs:
       - name: build
         run: ./gradlew build
 
-      - name: Publish to Modrinth
-        run: ./gradlew modrinth -Ptoken="${{ secrets.TOKEN }}"
-
       - name: capture build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: Artifacts
+          name: jars
           path: build/libs/
-            
-  release:
+
+  modrinth:
+    if: ${{ contains(github.event.head_commit.message, '[m]') }}
+
     permissions:
       contents: write
 
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+
+      - name: setup jdk
+        uses: actions/setup-java@v5.3.0
+        with:
+          java-version: ${{ env.java_ver }}
+          distribution: 'temurin'
+
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Publish to Modrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.TOKEN }}
+        run: ./gradlew modrinth
+
+  release:
     if: ${{ !contains(github.event.head_commit.message, '[skip]') }}
+
+    permissions:
+      contents: write
 
     needs: [ build ]
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Download Files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
+        with:
+          path: jars
+          merge-multiple: true
 
       - name: Create Release
-        uses: marvinpinto/action-automatic-releases@v1.2.0
+        if: ${{ !contains(github.event.head_commit.message, '[a]') || !contains(github.event.head_commit.message, '[b]')}}
+        uses: softprops/action-gh-release@v3
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Unknown Mod ${{ env.ver }}"
-          automatic_release_tag: "${{ env.tag }}"
-          prerelease: true
+          name: Unknown Mod ${{ env.ver_r }}
+          tag_name: ${{ env.tag_r }}
+          body_path: ${{ github.workspace }}/changelog.md
           draft: true
+          generate_release_notes: true
           files: |
-            unknown-mod-0.1.1.jar
-            unknown-mod-0.1.1-sources.jar
+            jars/*.jar
+
+      - name: Create Release
+        if: ${{ contains(github.event.head_commit.message, '[a]') && !contains(github.event.head_commit.message, '[b]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver_a }}
+          tag_name: ${{ env.tag_a }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar
+
+      - name: Create Release
+        if: ${{ contains(github.event.head_commit.message, '[b]') && !contains(github.event.head_commit.message, '[a]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver_b }}
+          tag_name: ${{ env.tag_b }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar

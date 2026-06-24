@@ -6,7 +6,6 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
-def bui = project.property("build")
 def id = project.property("archives_base_name")
 def namev = project.property("name_var")
 def descv = project.property("desc_var")
@@ -15,19 +14,18 @@ def loader = project.property("loader_version")
 def api = project.property("fabric_version")
 def mcver = project.property("minecraft_version")
 
-import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
-	token = project.property("token")
+	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "7EyjyjZ4"
-	versionNumber = "${version}+${mcver}+${bui}"
-	versionName = "Unknown Mod V${version} MCV-${mcver} Fabric"
+	versionNumber = "${version}"
+	versionName = "Unknown Mod v${version} [${mcver}-fabric]"
 	uploadFile = remapJar
 	gameVersions = ["1.19"]
 	changelog = file("changelog.md").text
 	loaders = ['fabric']
-	dependencies = [
-		new ModDependency("P7dR8mSH", "required")
-	]
+	dependencies {
+		required.project "fabric-api"
+	}
 }
 
 base {
