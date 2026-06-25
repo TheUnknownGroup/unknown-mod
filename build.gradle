@@ -16,19 +16,18 @@ def mcver = project.property("minecraft_version")
 def ver = project.property("ver")
 def modmen = project.property("modmenu_ver")
 
-import com.modrinth.minotaur.dependencies.ModDependency;
 modrinth {
-	token = project.property("token")
+	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "7EyjyjZ4"
 	versionNumber = "${version}"
-	versionName = "Unknown Mod V${ver} MCV-${mcver} Fabric"
+	versionName = "Unknown Mod v${version} [${mcver}-fabric]"
 	uploadFile = remapJar
-	gameVersions = ["1.19"]
+	gameVersions = ["1.19.1"]
 	changelog = file("changelog.md").text
 	loaders = ['fabric']
-	dependencies = [
-		new ModDependency("P7dR8mSH", "required")
-	]
+	dependencies {
+		required.project "fabric-api"
+	}
 }
 
 base {
