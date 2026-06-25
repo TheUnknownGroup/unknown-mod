@@ -13,14 +13,16 @@ def javaver = project.property("java_version")
 def loader = project.property("loader_version")
 def api = project.property("fabric_version")
 def mcver = project.property("minecraft_version")
+def ver = project.property("ver")
+def modmen = project.property("modmenu_ver")
 
 modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "7EyjyjZ4"
 	versionNumber = "${version}"
-	versionName = "Unknown Mod v${version} [${mcver}-fabric]"
+	versionName = "Unknown Mod v${ver} [${mcver}-fabric]"
 	uploadFile = remapJar
-	gameVersions = ["1.19"]
+	gameVersions = ["1.19.1"]
 	changelog = file("changelog.md").text
 	loaders = ['fabric']
 	dependencies {
@@ -34,6 +36,16 @@ base {
 
 repositories {
 
+}
+
+loom {
+	splitEnvironmentSourceSets()
+	mods {
+		"unknown-mod" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
 }
 
 dependencies {
@@ -57,7 +69,8 @@ processResources {
 				"java": javaver,
 				"id": id,
 				"name": namev,
-				"desc": descv
+				"desc": descv,
+				"modmen": modmen
 	}
 }
 
@@ -66,9 +79,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
 	sourceCompatibility = JavaVersion.VERSION_17
