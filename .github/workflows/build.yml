@@ -1,4 +1,4 @@
-name: Build v0.1.1
+name: Build v0.2.1
 on:
   push:
     branches:
@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
 
 env:
-  version: "0.1.1"
-  ver_a: "v0.1.1 [1.19.1-fabric]"
-  tag_a: "0.1.1-1.19.1+alpha.1"
-  ver_b: "v0.1.1 [1.19.1-fabric]"
-  tag_b: "0.1.1-1.19.1+beta.1"
-  ver_r: "0.1.1 [1.19.1-fabric]"
-  tag_r: "0.1.1-1.19.1"
+  version: "0.2.1"
+  ver_a: "v0.2.1 [1.19.1-fabric]"
+  tag_a: "0.2.1-1.19.1+alpha.1"
+  ver_b: "v0.2.1 [1.19.1-fabric]"
+  tag_b: "0.2.1-1.19.1+beta.1"
+  ver_r: "0.2.1 [1.19.1-fabric]"
+  tag_r: "0.2.1-1.19.1"
   java_ver: "17"
 
 jobs:
