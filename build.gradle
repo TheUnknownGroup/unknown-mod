@@ -20,7 +20,7 @@ modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "7EyjyjZ4"
 	versionNumber = "${version}"
-	versionName = "Unknown Mod v${version} [${mcver}-fabric]"
+	versionName = "Unknown Mod v${ver} [${mcver}-fabric]"
 	uploadFile = remapJar
 	gameVersions = ["1.19.1"]
 	changelog = file("changelog.md").text
