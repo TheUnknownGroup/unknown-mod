@@ -13,6 +13,7 @@ import xyz.theunknowngroup.UnknownMod;
 import xyz.theunknowngroup.item.ModItemGroup;
 
 public class ModBlocks {
+
     public static String MOD_ID = UnknownMod.MOD_ID;
     public static final Block UNKNOWN_BLOCK = registerBlock("unknown_block",
             new Block(FabricBlockSettings.of(Material.STONE)), ModItemGroup.UNKNOWN);

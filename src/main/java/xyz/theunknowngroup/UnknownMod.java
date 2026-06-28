@@ -4,7 +4,6 @@ import net.fabricmc.api.ModInitializer;
 
 import xyz.theunknowngroup.block.ModBlocks;
 import xyz.theunknowngroup.item.ModItems;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -8,7 +8,6 @@ import xyz.theunknowngroup.UnknownMod;
 
 public class ModItems {
     public static String MOD_ID = UnknownMod.MOD_ID;
-
     public static final Item UNKNOWN_ITEM = registerItem("unknown_item",
             new Item(new FabricItemSettings().group(ModItemGroup.UNKNOWN).maxCount(1)));
 
