@@ -1,0 +1,132 @@
+name: Build v0.2.1
+on:
+  push:
+    branches:
+      main
+  workflow_dispatch:
+
+env:
+  version: "0.1.1"
+  ver_a: "v0.1.1 [1.19-fabric]"
+  tag_a: "0.1.1-1.19+alpha.1"
+  ver_b: "v0.1.1 [1.19-fabric]"
+  tag_b: "0.1.1-1.19+beta.1"
+  ver_r: "0.1.1 [1.19-fabric]"
+  tag_r: "0.1.1-1.19"
+  java_ver: "17"
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.head_commit.message, '[skip]') }}
+
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+
+      - name: setup jdk
+        uses: actions/setup-java@v5.3.0
+        with:
+          java-version: ${{ env.java_ver }}
+          distribution: 'temurin'
+
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: build
+        run: ./gradlew build
+
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: jars
+          path: build/libs/
+
+  modrinth:
+    if: ${{ contains(github.event.head_commit.message, '[m]') }}
+
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+
+      - name: setup jdk
+        uses: actions/setup-java@v5.3.0
+        with:
+          java-version: ${{ env.java_ver }}
+          distribution: 'temurin'
+
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Publish to Modrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.TOKEN }}
+        run: ./gradlew modrinth
+
+  release:
+    if: ${{ !contains(github.event.head_commit.message, '[skip]') }}
+
+    permissions:
+      contents: write
+
+    needs: [ build ]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download Files
+        uses: actions/download-artifact@v8
+        with:
+          path: jars
+          merge-multiple: true
+
+      - name: Create Release
+        if: ${{ !contains(github.event.head_commit.message, '[a]') || !contains(github.event.head_commit.message, '[b]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver_r }}
+          tag_name: ${{ env.tag_r }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar
+
+      - name: Create Release
+        if: ${{ contains(github.event.head_commit.message, '[a]') && !contains(github.event.head_commit.message, '[b]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver_a }}
+          tag_name: ${{ env.tag_a }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar
+
+      - name: Create Release
+        if: ${{ contains(github.event.head_commit.message, '[b]') && !contains(github.event.head_commit.message, '[a]')}}
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Unknown Mod ${{ env.ver_b }}
+          tag_name: ${{ env.tag_b }}
+          body_path: ${{ github.workspace }}/changelog.md
+          draft: true
+          generate_release_notes: true
+          files: |
+            jars/*.jar
